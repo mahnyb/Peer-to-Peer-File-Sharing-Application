@@ -1,0 +1,46 @@
+services:
+  peer1:
+    build:
+      context: .
+    container_name: peer1
+    networks:
+      custom_network:
+    environment:
+      NODE_ID: "peer1"
+      PORT: "9000"
+    ports:
+      - "9001:9000/udp"
+    command: ["java", "Main"]
+
+  peer2:
+    build:
+      context: .
+    container_name: peer2
+    networks:
+      custom_network:
+    environment:
+      NODE_ID: "peer2"
+      PORT: "9000"
+    ports:
+      - "9002:9000/udp"
+    command: ["java", "Main"]
+
+  peer3:
+    build:
+      context: .
+    container_name: peer3
+    networks:
+      custom_network:
+    environment:
+      NODE_ID: "peer3"
+      PORT: "9000"
+    ports:
+      - "9003:9000/udp"
+    command: ["java", "Main"]
+
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.188.0/24
